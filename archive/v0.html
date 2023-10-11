@@ -9,15 +9,13 @@
     Data: 11.10.2023
 
     Histórico de Alterações: 
-    V |   Data   | Autor/Descrição 
+     V |   Data   | Autor/Descrição 
     ----------------------------------------------------------------------------
-    0 | 11.10.23 | Andre H. Zorek    
-      |          | Criação do Programa básico, operando com entrada de uma cifra numérica apenas.
-    ----------------------------------------------------------------------------
-    1 | 11.10.23 | Andre H. Zorek
-    | | Melhorias visuais e adição da funcionalidade 'copiar texto de saída para o clipboard'
+     0 | 11.10.23 | Andre H. Zorek    
+       |          | Criação do Programa básico, operando com entrada de uma cifra numérica apenas.
     ----------------------------------------------------------------------------
 !-->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -28,15 +26,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body
-  class="p-4 bg-white dark:bg-slate-900 text-slate-800 dark:text-white flex flex-col gap-8 items-center justify-center min-h-screen md:p-6 lg:p-8">
-  <h1 class="text-6xl font-semibold dark:text-slate-600 lg:text-6xl">Cifra de César</h1>
-  <div class="bg-slate-200 dark:bg-slate-800 flex flex-col gap-4 rounded-xl p-6 w-full max-w-md shadow-lg">
+<body class="bg-white dark:bg-slate-900 text-slate-800 dark:text-white flex items-center justify-center min-h-screen">
+  <div class="bg-slate-100 dark:bg-slate-800 rounded-lg p-6 w-full max-w-md shadow-lg">
+    <h1 class="text-4xl font-semibold mb-8">Cifra de César</h1>
 
     <!-- entrada textarea -->
-    <textarea id="textInput" rows="6"
-      class="block p-2.5 w-full text-sm text-slate-900 bg-slate-50 rounded-lg border border-slate-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder=" Digite o texto aqui..."></textarea>
+    <textarea id="textInput" class="w-full h-32 rounded-lg p-2 mb-4 dark:bg-slate-700"
+      placeholder="Digite o texto aqui..."></textarea>
 
     <!-- opções cifrar ou decifrar -->
 
@@ -58,12 +54,11 @@
     </div>
 
     <!-- saida textarea readonly -->
-    <textarea id="output" rows="6"
-      class="block p-2.5 w-full text-sm text-slate-900 bg-slate-50 rounded-lg border border-slate-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="Resultado" readonly></textarea>
+    <textarea id="output" class="w-full h-32 rounded-lg p-2 mb-4 dark:bg-slate-700" placeholder="Resultado"
+      readonly></textarea>
 
     <button type="button"
-      class="px-6 py-3.5 text-base font-medium text-white bg-slate-600 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-slate-500 rounded-lg text-center dark:bg-slate-900 dark:hover:bg-slate-950 dark:focus:ring-slate-700">Testar</button>
+      class="px-6 py-3.5 text-base font-medium text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-500 rounded-lg text-center dark:bg-gray-900 dark:hover:bg-gray-950 dark:focus:ring-gray-700">Testar</button>
   </div>
   <script>
     //O Programa
@@ -151,21 +146,6 @@
     function outputResult(str) {
       output.value = str
     }
-
-    //onclick selects the content of the textarea input
-    textInput.addEventListener('click', (e) => {
-      e.target.select()
-    })
-
-    //onclick, copies the output field content to clipboard
-    output.addEventListener('click', (e) => {
-      const source = e.target
-      source.select()
-      source.setSelectionRange(0, e.target.value.length)
-      navigator.clipboard.writeText(source.value)
-      alert('Valor foi copiado para o Clipboard')
-
-    })
   </script>
 </body>
 
