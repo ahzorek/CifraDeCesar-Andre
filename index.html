@@ -54,16 +54,37 @@
     const cypher = document.querySelector('#cypherValue')
     const output = document.querySelector('#output')
 
+    let stringEncoded, cyphered, uncyphered, stringDecoded
+
     //initializes the main function
     document.querySelector('button').addEventListener('click', (e) => {
-      const op = document.querySelector('input[name=operation]:checked').value
+      const OP = document.querySelector('input[name=operation]:checked').value
+      const CYPHER = Number(cypher.value)
 
-      let encoded = convertToCharCode(textInput.value)
-      decodeFromCharCode(encoded)
+      //if operation is decoding
+      if (OP === 'decode') {
+        //encodes the captured value to charcode array
+        stringEncoded = encodeToCharCode(textInput.value)
+        //uncyphers the value by the key
+        uncyphered = decypherValues(stringEncoded, CYPHER)
+        //decodes uncyphered value into char string
+        stringDecoded = decodeFromCharCode(uncyphered)
+
+      } else {
+        //encodes the captured value to charcode array
+        stringEncoded = encodeToCharCode(textInput.value)
+        //cyphers the value by the given key
+        cyphered = cypherEncodedValues(stringEncoded, CYPHER)
+        //decodes the cyphered value to a char string
+        stringDecoded = decodeFromCharCode(cyphered)
+      }
+
+      //output any given result to the screen
+      outputResult(stringDecoded)
     })
 
     //encodes text into charcode array
-    function convertToCharCode(str) {
+    function encodeToCharCode(str) {
       let arr = []
       for (let i = 0; i < str.length; i++) {
         arr.push(str.charCodeAt(i))
@@ -74,6 +95,7 @@
 
     //decoded text from a charcode array
     function decodeFromCharCode(arr) {
+      console.log('received:: ', arr)
       let str = ''
       for (let i = 0; i < arr.length; i++) {
         str = str.concat(String.fromCharCode(arr[i]))
@@ -82,14 +104,30 @@
       return str
     }
 
+    //takes (arr) an array and cypher its values by swapping it by (cy) an int
+    function cypherEncodedValues(arr, key = 3) {
+      console.log('received:: ', arr)
+      let encoded = []
+      arr.forEach(char => {
+        encoded.push(char + key)
+      })
+      console.log('returned:: ', encoded)
+      return encoded
+    }
+
+    //takes (arr) an array of cyphered values and decyphers it by its key, returns array
+    function decypherValues(arr, key) {
+      let decoded = []
+      arr.forEach(char => {
+        decoded.push(char - key)
+      })
+      return decoded
+    }
+
     //outputs: takes a string a prints it to the output element
     function outputResult(str) {
       output.value = str
     }
-
-
-
-
   </script>
 </body>
 
