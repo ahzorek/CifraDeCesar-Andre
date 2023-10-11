@@ -57,7 +57,9 @@
     //initializes the main function
     document.querySelector('button').addEventListener('click', (e) => {
       const op = document.querySelector('input[name=operation]:checked').value
-      console.log(op)
+
+      let encoded = convertToCharCode(textInput.value)
+      decodeFromCharCode(encoded)
     })
 
     //encodes text into charcode array
@@ -66,7 +68,23 @@
       for (let i = 0; i < str.length; i++) {
         arr.push(str.charCodeAt(i))
       }
+      console.log('encoded value:: ', arr)
       return arr
+    }
+
+    //decoded text from a charcode array
+    function decodeFromCharCode(arr) {
+      let str = ''
+      for (let i = 0; i < arr.length; i++) {
+        str = str.concat(String.fromCharCode(arr[i]))
+      }
+      console.log('decoded value:: ', str)
+      return str
+    }
+
+    //outputs: takes a string a prints it to the output element
+    function outputResult(str) {
+      output.value = str
     }
 
 
