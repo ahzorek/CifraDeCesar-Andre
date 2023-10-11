@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cifra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white dark:bg-slate-900 text-slate-800 dark:text-white flex items-center justify-center min-h-screen">
+  <div class="bg-slate-100 dark:bg-slate-800 rounded-lg p-6 w-full max-w-md shadow-lg">
+    <h1 class="text-4xl font-semibold mb-8">Cifra de César</h1>
+
+    <!-- entrada textarea -->
+    <textarea id="textInput" class="w-full h-32 rounded-lg p-2 mb-4 dark:bg-slate-700"
+      placeholder="Digite o texto aqui..."></textarea>
+
+    <!-- opções cifrar ou decifrar -->
+
+    <div class="mb-4">
+      <label class="block">
+        <input type="radio" name="operation" value="encode" class="mr-2">
+        Cifrar
+      </label>
+      <label class="block">
+        <input type="radio" name="operation" value="decode" class="mr-2">
+        Decifrar
+      </label>
+    </div>
+
+    <!-- input para informar valor da cifra -->
+    <div class="mb-4">
+      <label for="cypherValue" class="block">Informe a cifra:</label>
+      <input type="text" id="cypherValue" class="w-16 rounded-lg p-2 dark:bg-slate-700" placeholder="Cifra">
+    </div>
+
+    <!-- saida textarea readonly -->
+    <textarea id="output" class="w-full h-32 rounded-lg p-2 mb-4 dark:bg-slate-700" placeholder="Resultado"
+      readonly></textarea>
+
+    <button type="button"
+      class="px-6 py-3.5 text-base font-medium text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-500 rounded-lg text-center dark:bg-gray-900 dark:hover:bg-gray-950 dark:focus:ring-gray-700">Testar</button>
+  </div>
+  <script>
+    //O Programa
+    // - Desenvolva um programa que permita a entrada de um texto em um < textarea >.
+    // - Abaixo do textarea deve haver 2 radio buttons para permitir que o usuário escolha entre texto cifrado e decifrado.
+    // - Ao lado dos radio buttons deve haver um campo input que permita ao usuário que informe a cifra.
+    // - A cifra tem apenas 1 digito e pode ser numérica ou alfabética. Caso o usuário informe um caractere alfabético, a cifra será a posição do respectivo caractere dentro do alfabeto, por exemplo, "a" = 1, "b" = 2, "c" = 3 e assim por diante. 
+
+    //captures IO
+    const textInput = document.querySelector('#textInput')
+    const cypher = document.querySelector('#cypherValue')
+    const output = document.querySelector('#output')
+
+    //initializes the main function
+    document.querySelector('button').addEventListener('click', (e) => {
+      const op = document.querySelector('input[name=operation]:checked').value
+      console.log(op)
+    })
+
+    //encodes text into charcode array
+    function convertToCharCode(str) {
+      let arr = []
+      for (let i = 0; i < str.length; i++) {
+        arr.push(str.charCodeAt(i))
+      }
+      return arr
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>
