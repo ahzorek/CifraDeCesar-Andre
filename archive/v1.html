@@ -17,9 +17,6 @@
     1 | 11.10.23 | Andre H. Zorek
     | | Melhorias visuais e adição da funcionalidade 'copiar texto de saída para o clipboard'
     ----------------------------------------------------------------------------
-    2 | 11.10.23 | Andre H. Zorek
-    | | Implementa cifra por uma letra do alfabeto
-    ----------------------------------------------------------------------------
 !-->
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -77,48 +74,22 @@
 
     //captures IO
     const textInput = document.querySelector('#textInput')
+    const cypher = document.querySelector('#cypherValue')
     const output = document.querySelector('#output')
 
-    let stringEncoded, cyphered, uncyphered, stringDecoded, cypher
-
-    //handles the cypher validation logic
-    document.querySelector('#cypherValue').addEventListener('keyup', (e) => {
-      cypher = normalizeCypher(e.target.value)
-    })
-
-    function normalizeCypher(val) {
-      let cy
-      if (isNaN(Number(val))) {
-        cy = val.toLowerCase().charCodeAt(0) - 96
-        console.log(cy);
-      } else if (Number(val) > 9 || Number(val) < 1) {
-        // alert('Valor de cifra não pode ser maior que 10 ou menor que 1')
-        // cleanInput(document.querySelector('#cypherValue'))
-      } else
-        cy = val
-
-      if (cy < 0 || cy > 27) {
-        return 5
-      } else return cy
-    }
-
-    function cleanInput(ref) {
-      ref.value = '1'
-      ref.focus()
-    }
-
+    let stringEncoded, cyphered, uncyphered, stringDecoded
 
     //initializes the main function
     document.querySelector('button').addEventListener('click', (e) => {
       const OP = document.querySelector('input[name=operation]:checked').value
-      // const CYPHER = cypher
+      const CYPHER = Number(cypher.value)
 
       //if operation is decoding
       if (OP === 'decode') {
         //encodes the captured value to charcode array
         stringEncoded = encodeToCharCode(textInput.value)
         //uncyphers the value by the key
-        uncyphered = decypherValues(stringEncoded, cypher)
+        uncyphered = decypherValues(stringEncoded, CYPHER)
         //decodes uncyphered value into char string
         stringDecoded = decodeFromCharCode(uncyphered)
 
@@ -126,7 +97,7 @@
         //encodes the captured value to charcode array
         stringEncoded = encodeToCharCode(textInput.value)
         //cyphers the value by the given key
-        cyphered = cypherEncodedValues(stringEncoded, cypher)
+        cyphered = cypherEncodedValues(stringEncoded, CYPHER)
         //decodes the cyphered value to a char string
         stringDecoded = decodeFromCharCode(cyphered)
       }
@@ -141,40 +112,39 @@
       for (let i = 0; i < str.length; i++) {
         arr.push(str.charCodeAt(i))
       }
-      // console.log('encoded value:: ', arr)
+      console.log('encoded value:: ', arr)
       return arr
     }
 
     //decoded text from a charcode array
     function decodeFromCharCode(arr) {
-      // console.log('received:: ', arr)
+      console.log('received:: ', arr)
       let str = ''
       for (let i = 0; i < arr.length; i++) {
         str = str.concat(String.fromCharCode(arr[i]))
       }
-      // console.log('decoded value:: ', str)
+      console.log('decoded value:: ', str)
       return str
     }
 
     //takes (arr) an array and cypher its values by swapping it by (cy) an int
     function cypherEncodedValues(arr, key = 3) {
-      // console.log('received:: ', arr)
+      console.log('received:: ', arr)
       let encoded = []
       arr.forEach(char => {
         encoded.push(char + key)
       })
-      console.log('returned:: ', cyphered, 'using cypher:::', key)
+      console.log('returned:: ', encoded)
       return encoded
     }
 
     //takes (arr) an array of cyphered values and decyphers it by its key, returns array
     function decypherValues(arr, key) {
-      let decyphered = []
+      let decoded = []
       arr.forEach(char => {
-        decyphered.push(char - key)
+        decoded.push(char - key)
       })
-      console.log('returned:: ', decyphered, 'using cypher:::', key)
-      return decyphered
+      return decoded
     }
 
     //outputs: takes a string a prints it to the output element
