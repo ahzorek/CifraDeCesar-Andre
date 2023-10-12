@@ -22,7 +22,7 @@
     ----------------------------------------------------------------------------
     3 | 12.10.23 | Andre H. Zorek
       |          | conserta bugs introduzidos na versão anterior. simplifica toda a lógica do programa 
-                 | para apenas uma função encoder/decoder. melhora normalização do char cypher key
+                 | para apenas uma função encoder/decoder. melhora normalização do char cipher key
    ----------------------------------------------------------------------------
 !-->
 
@@ -61,8 +61,8 @@
 
     <!-- input para informar valor da cifra -->
     <div class="mb-4">
-      <label for="cypherValue" class="block">Informe a cifra:</label>
-      <input type="text" id="cypherValue" class="w-16 rounded-lg p-2 dark:bg-slate-700" placeholder="Cifra">
+      <label for="cipherValue" class="block">Informe a cifra:</label>
+      <input type="text" id="cipherValue" class="w-16 rounded-lg p-2 dark:bg-slate-700" placeholder="Cifra">
     </div>
 
     <!-- saida textarea readonly -->
@@ -84,15 +84,15 @@
     const textInput = document.querySelector('#textInput')
     const output = document.querySelector('#output')
 
-    let stringEncoded, cyphered, uncyphered, stringDecoded, cypher
+    let stringEncoded, ciphered, unciphered, stringDecoded, cipher
 
-    //handles the cypher validation logic
-    document.querySelector('#cypherValue').addEventListener('keyup', (e) => {
-      cypher = normalizeCypher(e.target.value)
+    //handles the cipher validation logic
+    document.querySelector('#cipherValue').addEventListener('keyup', (e) => {
+      cipher = normalizecipher(e.target.value)
     })
 
-    //checks type of char passed as cypher key
-    function normalizeCypher(val) {
+    //checks type of char passed as cipher key
+    function normalizecipher(val) {
       if (isNaN(Number(val)) === false) {
         if (val < 10 && val > 0) {
           return Number(val)
@@ -108,17 +108,17 @@
 
       //if operation is decoding, inverts key
       if (OP === 'decode') {
-        cypher = cypher * -1
+        cipher = cipher * -1
       }
 
       //calls the encode/decode function
-      const cypheredValue = swapValuesByKey(textInput.value, cypher)
+      const cipheredValue = swapValuesByKey(textInput.value, cipher)
 
       //output any given result to the screen
-      outputResult(cypheredValue)
+      outputResult(cipheredValue)
     })
 
-    //takes a string and a cypher key, swaps its value by its key, returns a new string
+    //takes a string and a cipher key, swaps its value by its key, returns a new string
     function swapValuesByKey(str, key) {
       let newStr = ''
       for (let i = 0; i < str.length; i++) {
