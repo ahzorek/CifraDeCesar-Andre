@@ -56,8 +56,8 @@
 
     <!-- input para informar valor da cifra -->
     <div class="mb-4">
-      <label for="cypherValue" class="block">Informe a cifra:</label>
-      <input type="text" id="cypherValue" class="w-16 rounded-lg p-2 dark:bg-slate-700" placeholder="Cifra">
+      <label for="cipherValue" class="block">Informe a cifra:</label>
+      <input type="text" id="cipherValue" class="w-16 rounded-lg p-2 dark:bg-slate-700" placeholder="Cifra">
     </div>
 
     <!-- saida textarea readonly -->
@@ -79,21 +79,21 @@
     const textInput = document.querySelector('#textInput')
     const output = document.querySelector('#output')
 
-    let stringEncoded, cyphered, uncyphered, stringDecoded, cypher
+    let stringEncoded, ciphered, unciphered, stringDecoded, cipher
 
-    //handles the cypher validation logic
-    document.querySelector('#cypherValue').addEventListener('keyup', (e) => {
-      cypher = normalizeCypher(e.target.value)
+    //handles the cipher validation logic
+    document.querySelector('#cipherValue').addEventListener('keyup', (e) => {
+      cipher = normalizecipher(e.target.value)
     })
 
-    function normalizeCypher(val) {
+    function normalizecipher(val) {
       let cy
       if (isNaN(Number(val))) {
         cy = val.toLowerCase().charCodeAt(0) - 96
         console.log(cy);
       } else if (Number(val) > 9 || Number(val) < 1) {
         // alert('Valor de cifra não pode ser maior que 10 ou menor que 1')
-        // cleanInput(document.querySelector('#cypherValue'))
+        // cleanInput(document.querySelector('#cipherValue'))
       } else
         cy = val
 
@@ -111,24 +111,24 @@
     //initializes the main function
     document.querySelector('button').addEventListener('click', (e) => {
       const OP = document.querySelector('input[name=operation]:checked').value
-      // const CYPHER = cypher
+      // const cipher = cipher
 
       //if operation is decoding
       if (OP === 'decode') {
         //encodes the captured value to charcode array
         stringEncoded = encodeToCharCode(textInput.value)
-        //uncyphers the value by the key
-        uncyphered = decypherValues(stringEncoded, cypher)
-        //decodes uncyphered value into char string
-        stringDecoded = decodeFromCharCode(uncyphered)
+        //unciphers the value by the key
+        unciphered = decipherValues(stringEncoded, cipher)
+        //decodes unciphered value into char string
+        stringDecoded = decodeFromCharCode(unciphered)
 
       } else {
         //encodes the captured value to charcode array
         stringEncoded = encodeToCharCode(textInput.value)
-        //cyphers the value by the given key
-        cyphered = cypherEncodedValues(stringEncoded, cypher)
-        //decodes the cyphered value to a char string
-        stringDecoded = decodeFromCharCode(cyphered)
+        //ciphers the value by the given key
+        ciphered = cipherEncodedValues(stringEncoded, cipher)
+        //decodes the ciphered value to a char string
+        stringDecoded = decodeFromCharCode(ciphered)
       }
 
       //output any given result to the screen
@@ -156,25 +156,25 @@
       return str
     }
 
-    //takes (arr) an array and cypher its values by swapping it by (cy) an int
-    function cypherEncodedValues(arr, key = 3) {
+    //takes (arr) an array and cipher its values by swapping it by (cy) an int
+    function cipherEncodedValues(arr, key = 3) {
       // console.log('received:: ', arr)
       let encoded = []
       arr.forEach(char => {
         encoded.push(char + key)
       })
-      console.log('returned:: ', cyphered, 'using cypher:::', key)
+      console.log('returned:: ', ciphered, 'using cipher:::', key)
       return encoded
     }
 
-    //takes (arr) an array of cyphered values and decyphers it by its key, returns array
-    function decypherValues(arr, key) {
-      let decyphered = []
+    //takes (arr) an array of ciphered values and deciphers it by its key, returns array
+    function decipherValues(arr, key) {
+      let deciphered = []
       arr.forEach(char => {
-        decyphered.push(char - key)
+        deciphered.push(char - key)
       })
-      console.log('returned:: ', decyphered, 'using cypher:::', key)
-      return decyphered
+      console.log('returned:: ', deciphered, 'using cipher:::', key)
+      return deciphered
     }
 
     //outputs: takes a string a prints it to the output element

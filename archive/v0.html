@@ -49,8 +49,8 @@
 
     <!-- input para informar valor da cifra -->
     <div class="mb-4">
-      <label for="cypherValue" class="block">Informe a cifra:</label>
-      <input type="text" id="cypherValue" class="w-16 rounded-lg p-2 dark:bg-slate-700" placeholder="Cifra">
+      <label for="cipherValue" class="block">Informe a cifra:</label>
+      <input type="text" id="cipherValue" class="w-16 rounded-lg p-2 dark:bg-slate-700" placeholder="Cifra">
     </div>
 
     <!-- saida textarea readonly -->
@@ -69,32 +69,32 @@
 
     //captures IO
     const textInput = document.querySelector('#textInput')
-    const cypher = document.querySelector('#cypherValue')
+    const cipher = document.querySelector('#cipherValue')
     const output = document.querySelector('#output')
 
-    let stringEncoded, cyphered, uncyphered, stringDecoded
+    let stringEncoded, ciphered, unciphered, stringDecoded
 
     //initializes the main function
     document.querySelector('button').addEventListener('click', (e) => {
       const OP = document.querySelector('input[name=operation]:checked').value
-      const CYPHER = Number(cypher.value)
+      const cipher = Number(cipher.value)
 
       //if operation is decoding
       if (OP === 'decode') {
         //encodes the captured value to charcode array
         stringEncoded = encodeToCharCode(textInput.value)
-        //uncyphers the value by the key
-        uncyphered = decypherValues(stringEncoded, CYPHER)
-        //decodes uncyphered value into char string
-        stringDecoded = decodeFromCharCode(uncyphered)
+        //unciphers the value by the key
+        unciphered = decipherValues(stringEncoded, cipher)
+        //decodes unciphered value into char string
+        stringDecoded = decodeFromCharCode(unciphered)
 
       } else {
         //encodes the captured value to charcode array
         stringEncoded = encodeToCharCode(textInput.value)
-        //cyphers the value by the given key
-        cyphered = cypherEncodedValues(stringEncoded, CYPHER)
-        //decodes the cyphered value to a char string
-        stringDecoded = decodeFromCharCode(cyphered)
+        //ciphers the value by the given key
+        ciphered = cipherEncodedValues(stringEncoded, cipher)
+        //decodes the ciphered value to a char string
+        stringDecoded = decodeFromCharCode(ciphered)
       }
 
       //output any given result to the screen
@@ -122,8 +122,8 @@
       return str
     }
 
-    //takes (arr) an array and cypher its values by swapping it by (cy) an int
-    function cypherEncodedValues(arr, key = 3) {
+    //takes (arr) an array and cipher its values by swapping it by (cy) an int
+    function cipherEncodedValues(arr, key = 3) {
       console.log('received:: ', arr)
       let encoded = []
       arr.forEach(char => {
@@ -133,8 +133,8 @@
       return encoded
     }
 
-    //takes (arr) an array of cyphered values and decyphers it by its key, returns array
-    function decypherValues(arr, key) {
+    //takes (arr) an array of ciphered values and deciphers it by its key, returns array
+    function decipherValues(arr, key) {
       let decoded = []
       arr.forEach(char => {
         decoded.push(char - key)
